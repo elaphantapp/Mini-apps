@@ -1,0 +1,270 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+
+    const done = () => {
+        var capsule = {}
+        var appNameEn = document.getElementById("appname-en").value
+        var appNameCn = document.getElementById("appname-cn").value
+
+        if (appNameEn == "" && appNameCn == "") {
+            alert("请输入应用名称")
+            return
+        }
+
+        var appName = {}
+        appName.en = appNameEn
+        appName.cn = appNameCn
+        capsule.name = appName
+
+        var icon1x = document.getElementById("icon-1x").value
+        var icon2x = document.getElementById("icon-2x").value
+        var icon3x = document.getElementById("icon-3x").value
+
+        var icon = {}
+        icon.xhdpi = document.getElementById("icon-1x").value
+        icon.xxhdpi = document.getElementById("icon-2x").value
+        icon.xxxhdpi = document.getElementById("icon-3x").value
+        capsule.icon = icon
+
+        var banner = {}
+        var en = {}
+        en.xhdpi = document.getElementById("banner-en-1x").value
+        en.xxhdpi = document.getElementById("banner-en-2x").value
+        en.xxxhdpi = document.getElementById("banner-en-3x").value
+        banner.en = en
+
+        var cn = {}
+        cn.xhdpi = document.getElementById("banner-cn-1x").value
+        cn.xxhdpi = document.getElementById("banner-cn-2x").value
+        cn.xxxhdpi = document.getElementById("banner-cn-3x").value
+        banner.cn = cn
+        capsule.banner = banner
+
+        var shortDesc = {}
+        shortDesc.en = document.getElementById("shortDesc-en").value
+        shortDesc.cn = document.getElementById("shortDesc-cn").value
+        capsule.shortDesc = shortDesc
+
+        var longDesc = {}
+        longDesc.en = document.getElementById("longDesc-en").value
+        longDesc.cn = document.getElementById("longDesc-cn").value
+        capsule.longDesc = longDesc
+
+        var radios = document.getElementsByName('category');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                capsule.category = radios[i].value
+                break;
+            }
+        }
+        if (capsule.category == undefined) {
+            alert("请选择分类")
+            return
+        }
+
+        radios = document.getElementsByName('platform');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                capsule.platform = radios[i].value
+                break;
+            }
+        }
+        if (capsule.platform == undefined) {
+            alert("请选择平台")
+            return
+        }
+
+        capsule.version = document.getElementById("version").value
+
+        var releaseNote = document.getElementById("releaseNote").value
+        if (releaseNote != "") {
+            capsule.releaseNote = releaseNote
+        }
+
+        var url = document.getElementById("url").value
+        if (url == "") {
+            alert("请输入链接")
+            return
+        }
+        capsule.url = url
+
+        if (capsule.platform != "Web") {
+            capsule.size = parseInt(document.getElementById("size").value)
+            capsule.hash = document.getElementById("hash").value
+        }
+
+        document.getElementById("capsule").innerHTML = JSON.stringify(capsule)
+
+    }
+
+
+</script>
+<style>
+    textarea {
+        font-size: 20px;
+        vertical-align: middle;
+    }
+
+    lable {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+</style>
+</head>
+<body>
+
+<p style="font-size: 22px">应用名称</p>
+<div>
+    <lable >英文</lable>
+    <textarea id="appname-en" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
+    <lable >中文</lable>
+    <textarea id="appname-cn" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+
+<p style="font-size: 22px">图标包内路径</p>
+
+<div>
+    <lable >xhdpi</lable>
+    <textarea id="icon-1x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
+    <lable >xxhdpi</lable>
+    <textarea id="icon-2x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+<div style="padding-top: 10px">
+    <lable >xxxhdpi</lable>
+    <textarea id="icon-3x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+
+<p style="font-size: 22px">banner包内路径</p>
+<p>英文</p>
+<div>
+    <lable >xhdpi</lable>
+    <textarea id="banner-en-1x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
+    <lable >xxhdpi</lable>
+    <textarea id="banner-en-2x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+<div style="padding-top: 10px">
+    <lable >xxxhdpi</lable>
+    <textarea id="banner-en-3x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<p>中文</p>
+<div>
+    <lable >xhdpi</lable>
+    <textarea id="banner-cn-1x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
+    <lable >xxhdpi</lable>
+    <textarea id="banner-cn-2x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+<div style="padding-top: 10px">
+    <lable >xxxhdpi</lable>
+    <textarea id="banner-cn-3x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 20px">
+    <lable >notificationUrl</lable>
+    <textarea id="notificationUrl" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+
+<p style="font-size: 22px">shortDesc</p>
+<div>
+    <lable >英文</lable>
+    <textarea id="shortDesc-en" style="width:450px; height: 100px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
+    <lable >中文</lable>
+    <textarea id="shortDesc-cn" style="width:450px; height: 100px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<p style="font-size: 22px">longDesc</p>
+<div>
+    <lable >英文</lable>
+    <textarea id="longDesc-en" style="width:450px; height: 150px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
+    <lable >中文</lable>
+    <textarea id="longDesc-cn" style="width:450px; height: 150px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<form action="" method="get" style="margin-top: 20px">
+<p style="font-size: 22px">分类</p>
+<label><input name="category" type="radio" value="game" />game </label>
+<label><input name="category" type="radio" value="health" />health </label>
+<label><input name="category" type="radio" value="map" />map </label>
+<label><input name="category" type="radio" value="food" />food </label>
+<label><input name="category" type="radio" value="business" />business </label>
+<label><input name="category" type="radio" value="beauty" />beauty </label>
+<label><input name="category" type="radio" value="education" />education </label>
+<label><input name="category" type="radio" value="books" />books </label>
+<label><input name="category" type="radio" value="entertainment" />entertainment </label>
+<label><input name="category" type="radio" value="lifestyle" />lifestyle </label>
+<label><input name="category" type="radio" value="events" />events </label>
+<label><input name="category" type="radio" value="home" />home </label>
+</form>
+
+<form action="" method="get" style="margin-top: 20px">
+<p style="font-size: 22px">Platform</p>
+<label><input name="platform" type="radio" value="Web" />Web </label>
+<label><input name="platform" type="radio" value="H5" />H5 </label>
+</form>
+
+
+<div style="padding-top: 20px">
+    <lable >版本号</lable>
+    <textarea id="version" style="width:100px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 20px">
+    <lable >ReleaseNote</lable>
+    <textarea id="releaseNote" style="width:450px; height: 150px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+
+<div style="padding-top: 20px">
+    <lable >Url</lable>
+    <textarea id="url" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 20px">
+    <lable >H5运行包大小</lable>
+    <textarea id="size" style="width:100px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <lable >KB</lable>
+</div>
+
+<div style="padding-top: 20px">
+    <lable >H5运行包hash</lable>
+    <textarea id="hash" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<br/>
+<div>
+<button type="button" onclick="done()" style="width:100px; height:30px;">完成</button>
+</div>
+
+<br/>
+<p style="font-size: 22px">capsule</p>
+<p id="capsule"></p>
+
+<br/>
+<br/>
+
+</body>
+</html>
