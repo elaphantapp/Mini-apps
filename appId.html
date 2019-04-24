@@ -1,0 +1,105 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="elastos-wallet-api-min.js"></script>
+<script type="text/javascript">
+
+    const done = () => {
+        var appname = document.getElementById("appname").value
+
+        if (appname == "") {
+            alert("请输入应用名称")
+            return
+        }
+
+        var newAccount = false
+        var mnemonic = document.getElementById("mnemonic").value
+        if (mnemonic == "") {
+            mnemonic = generateMnemonic()
+            newAccount = true
+        }
+
+        var seed = getSeedFromMnemonic(mnemonic)
+        var privateKey = generateSubPrivateKey(seed, COIN_TYPE_ELA, EXTERNAL_CHAIN, 0).toString('hex')
+        var masterPublicKey = getMasterPublicKey(seed)
+        var publicKey = generateSubPublicKey(masterPublicKey, EXTERNAL_CHAIN, 0).toString('hex')
+
+        var did = getDid(publicKey)
+
+        var appId = sign(appname, privateKey)
+
+        var json = {}
+        json.Tag = "DID Property"
+        json.Ver = "1.0"
+        json.Status = "Normal"
+
+        var properties = []
+        var i = 0
+
+        if (newAccount) {
+            var property = {}
+            property.Key = "PublicKey"
+            property.Value = publicKey
+            property.Status = "Normal"
+            properties[i] = property
+            i++
+        }
+        var propertyId = {}
+        propertyId.Key = "Dev/" + appname + "/AppID"
+        propertyId.Value = appId
+        propertyId.Status = "Normal"
+        properties[i] = propertyId
+
+        json.Properties = properties
+
+        var ret = "AppName: " + appname + "<br/>" + "Mnemonic: " + mnemonic + "<br/>"
+                + "PrivateKey: " + privateKey + "<br/>" + "PublicKey: " + publicKey + "<br/>"
+                + "Did: " + did + "<br/>"  + "AppID: " + appId + "<br/>" + "UploadData: " + JSON.stringify(json)
+
+        document.getElementById("appId").innerHTML = ret
+
+    }
+
+</script>
+
+<style>
+    textarea {
+        font-size: 20px;
+        vertical-align: middle;
+    }
+
+    lable {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+</style>
+</head>
+<body>
+
+<p style="font-size: 24px;">生成AppID</p>
+<div>
+    <lable >应用名称</lable>
+    <textarea id="appname" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+<br/>
+
+<div>
+    <lable >助记词</lable>
+    <textarea id="mnemonic" style="width:800px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+<br/>
+
+<div>
+<button type="button" onclick="done()" style="width:100px; height:30px;">完成</button>
+</div>
+
+<br/>
+
+<br/>
+<p style="font-size: 22px">AppID</p>
+<p id="appId" style="word-wrap:break-word;"></p>
+
+</body>
+</html>
