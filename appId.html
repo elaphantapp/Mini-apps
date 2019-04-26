@@ -3,6 +3,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script src="elastos-wallet-api-min.js"></script>
+<script src="did.js"></script>
+<script src="CryptoJS/rollups/md5.js"></script>
 <script type="text/javascript">
 
     const done = () => {
@@ -13,51 +15,22 @@
             return
         }
 
-        var newAccount = false
         var mnemonic = document.getElementById("mnemonic").value
         if (mnemonic == "") {
-            mnemonic = generateMnemonic()
-            newAccount = true
+            alert("请输入助记词")
+            return
         }
 
-        var seed = getSeedFromMnemonic(mnemonic)
-        var privateKey = generateSubPrivateKey(seed, COIN_TYPE_ELA, EXTERNAL_CHAIN, 0).toString('hex')
-        var masterPublicKey = getMasterPublicKey(seed)
-        var publicKey = generateSubPublicKey(masterPublicKey, EXTERNAL_CHAIN, 0).toString('hex')
+        var json = restoreDid(mnemonic)
 
-        var did = getDid(publicKey)
+        var appId = sign(appname, json.privateKey)
 
-        var appId = sign(appname, privateKey)
-
-        var json = {}
-        json.Tag = "DID Property"
-        json.Ver = "1.0"
-        json.Status = "Normal"
-
-        var properties = []
-        var i = 0
-
-        if (newAccount) {
-            var property = {}
-            property.Key = "PublicKey"
-            property.Value = publicKey
-            property.Status = "Normal"
-            properties[i] = property
-            i++
-        }
-        var propertyId = {}
-        propertyId.Key = "Dev/" + appname + "/AppID"
-        propertyId.Value = appId
-        propertyId.Status = "Normal"
-        properties[i] = propertyId
-
-        json.Properties = properties
-
-        var ret = "AppName: " + appname + "<br/>" + "Mnemonic: " + mnemonic + "<br/>"
-                + "PrivateKey: " + privateKey + "<br/>" + "PublicKey: " + publicKey + "<br/>"
-                + "Did: " + did + "<br/>"  + "AppID: " + appId + "<br/>" + "UploadData: " + JSON.stringify(json)
+        var ret = "AppName: " + appname + "<br/>" + "AppID: " + appId + "<br/>"
 
         document.getElementById("appId").innerHTML = ret
+
+        var txid = setInfo(accId, accSecret, "Dev/" + appname + "/AppID", appId, json.mnemonic)
+        document.getElementById("txid").innerHTML = "Txid: " + txid
 
     }
 
@@ -98,8 +71,8 @@
 <br/>
 
 <br/>
-<p style="font-size: 22px">AppID</p>
 <p id="appId" style="word-wrap:break-word;"></p>
+<p id="txid" style="word-wrap:break-word;"></p>
 
 </body>
 </html>
