@@ -2,7 +2,7 @@
 var AGENT_URL_TEST = "https://api-wallet-did-testnet.elastos.org"
 var AGENT_URL_PRODUCE = "https://api-wallet-did.elastos.org"
 
-const AGENT_URL = AGENT_URL_TEST
+const AGENT_URL = AGENT_URL_PRODUCE
 
 const accId = "Z0BDGNkGzkD0fBY"
 const accSecret = "7OyvLKvkfxp8AC6eJr5OXF00dRqVoS"
@@ -45,7 +45,8 @@ var uploadMemo = (accId, accSecret, key, value, seed, privateKey) => {
 
     console.log(JSON.stringify(auth))
 
-    return fetch(AGENT_URL + "/api/2/blockagent/upchain/data", {
+    // /api/2/blockagent/upchain/data
+    return fetch(AGENT_URL + "/api/1/blockagent/upchain/data", {
         method: 'POST',
         mode: 'cors',
         headers: {
