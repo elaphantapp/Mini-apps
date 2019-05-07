@@ -16,8 +16,10 @@
 
         document.getElementById("did").innerHTML = ret
 
-        var txid = setInfo(accId, accSecret, "PublicKey", json.publicKey, json.mnemonic)
-        document.getElementById("pubkeyTxid").innerHTML = "Txid: " + txid
+        setInfo(accId, accSecret, "PublicKey", json.publicKey, json.mnemonic)
+        .then(ret => {
+            document.getElementById("pubkeyTxid").innerHTML = "Txid: " + ret.txid
+        })
     }
 
 </script>

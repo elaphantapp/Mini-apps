@@ -29,8 +29,10 @@
 
         document.getElementById("appId").innerHTML = ret
 
-        var txid = setInfo(accId, accSecret, "Dev/" + appname + "/AppID", appId, json.mnemonic)
-        document.getElementById("txid").innerHTML = "Txid: " + txid
+        setInfo(accId, accSecret, "Dev/" + appname + "/AppID", appId, json.mnemonic)
+        .then(ret => {
+            document.getElementById("txid").innerHTML = "Txid: " + ret.txid
+        })
 
     }
 
