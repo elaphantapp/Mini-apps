@@ -6,52 +6,57 @@
 
     const done = () => {
         var capsule = {}
+        var appname = document.getElementById("appname-default").value
         var appNameEn = document.getElementById("appname-en").value
         var appNameCn = document.getElementById("appname-cn").value
 
-        if (appNameEn == "" && appNameCn == "") {
+        if (appname == "") {
             alert("请输入应用名称")
             return
         }
 
-        var appName = {}
-        appName.en = appNameEn
-        appName.cn = appNameCn
-        capsule.name = appName
+        capsule.name = appname
+        capsule.name_en = appNameEn
+        capsule.name_zh_CN = appNameCn
 
-        var icon1x = document.getElementById("icon-1x").value
-        var icon2x = document.getElementById("icon-2x").value
-        var icon3x = document.getElementById("icon-3x").value
+        let appId = document.getElementById("appid").value
+        if (appId == "") {
+            alert("请输入App Id")
+            return
+        }
+        capsule.appId = appId
 
-        var icon = {}
-        icon.xhdpi = document.getElementById("icon-1x").value
-        icon.xxhdpi = document.getElementById("icon-2x").value
-        icon.xxxhdpi = document.getElementById("icon-3x").value
-        capsule.icon = icon
+        let did = document.getElementById("did").value
+        let publickey = document.getElementById("publickey").value
+        if (did == "" || publickey == "") {
+            alert("请输入开发者信息")
+            return
+        }
 
-        var banner = {}
-        var en = {}
-        en.xhdpi = document.getElementById("banner-en-1x").value
-        en.xxhdpi = document.getElementById("banner-en-2x").value
-        en.xxxhdpi = document.getElementById("banner-en-3x").value
-        banner.en = en
+        capsule.did = did
+        capsule.publicKey = publickey
 
-        var cn = {}
-        cn.xhdpi = document.getElementById("banner-cn-1x").value
-        cn.xxhdpi = document.getElementById("banner-cn-2x").value
-        cn.xxxhdpi = document.getElementById("banner-cn-3x").value
-        banner.cn = cn
-        capsule.banner = banner
+        capsule.icon = document.getElementById("icon-default").value
+        capsule.icon_xhdpi = document.getElementById("icon-1x").value
+        capsule.icon_xxhdpi = document.getElementById("icon-2x").value
+        capsule.icon_xxxhdpi = document.getElementById("icon-3x").value
 
-        var shortDesc = {}
-        shortDesc.en = document.getElementById("shortDesc-en").value
-        shortDesc.cn = document.getElementById("shortDesc-cn").value
-        capsule.shortDesc = shortDesc
+        capsule.banner = document.getElementById("banner-default").value
+        capsule.banner_en_xhdpi = document.getElementById("banner-en-1x").value
+        capsule.banner_en_xxhdpi = document.getElementById("banner-en-2x").value
+        capsule.banner_en_xxxhdpi = document.getElementById("banner-en-3x").value
 
-        var longDesc = {}
-        longDesc.en = document.getElementById("longDesc-en").value
-        longDesc.cn = document.getElementById("longDesc-cn").value
-        capsule.longDesc = longDesc
+        capsule.banner_zh_CN_xhdpi = document.getElementById("banner-cn-1x").value
+        capsule.banner_zh_CN_xxhdpi = document.getElementById("banner-cn-2x").value
+        capsule.banner_zh_CN_xxxhdpi = document.getElementById("banner-cn-3x").value
+
+        capsule.shortDesc = document.getElementById("shortDesc-default").value
+        capsule.shortDesc_en = document.getElementById("shortDesc-en").value
+        capsule.shortDesc_zh_CN = document.getElementById("shortDesc-cn").value
+
+        capsule.longDesc = document.getElementById("longDesc-default").value
+        capsule.longDesc_en = document.getElementById("longDesc-en").value
+        capsule.longDesc_zh_CN = document.getElementById("longDesc-cn").value
 
         var radios = document.getElementsByName('category');
         for (var i = 0; i < radios.length; i++) {
@@ -118,7 +123,12 @@
 <body>
 
 <p style="font-size: 22px">应用名称</p>
-<div>
+<div >
+    <lable >default</lable>
+    <textarea id="appname-default" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
     <lable >英文</lable>
     <textarea id="appname-en" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
 </div>
@@ -128,9 +138,30 @@
     <textarea id="appname-cn" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
 </div>
 
+<div style="padding-top: 10px">
+    <lable >appId</lable>
+    <textarea id="appid" style="width:450px; height: 60px; padding-left: 10px;" row="1"></textarea>
+</div>
+
+<p style="font-size: 22px">开发者信息</p>
+<div>
+    <lable >DID</lable>
+    <textarea id="did" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
+    <lable >公钥</lable>
+    <textarea id="publickey" style="width:450px; height: 60px; padding-left: 10px;" row="1"></textarea>
+</div>
+
 <p style="font-size: 22px">图标包内路径</p>
 
-<div>
+<div >
+    <lable >default</lable>
+    <textarea id="icon-default" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+
+<div  style="padding-top: 10px">
     <lable >xhdpi</lable>
     <textarea id="icon-1x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
 </div>
@@ -146,6 +177,11 @@
 
 
 <p style="font-size: 22px">banner包内路径</p>
+<div >
+    <lable >default</lable>
+    <textarea id="banner-default" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+
 <p>英文</p>
 <div>
     <lable >xhdpi</lable>
@@ -183,7 +219,12 @@
 
 
 <p style="font-size: 22px">shortDesc</p>
-<div>
+<div >
+    <lable >default</lable>
+    <textarea id="shortDesc-default" style="width:450px; height: 100px; padding-left: 10px;" row="1"></textarea>
+</div>
+
+<div style="padding-top: 10px">
     <lable >英文</lable>
     <textarea id="shortDesc-en" style="width:450px; height: 100px; margin-left: 10px;" row="1"></textarea>
 </div>
@@ -194,7 +235,11 @@
 </div>
 
 <p style="font-size: 22px">longDesc</p>
-<div>
+<div >
+    <lable >default</lable>
+    <textarea id="longDesc-default" style="width:450px; height: 100px; padding-left: 10px;" row="1"></textarea>
+</div>
+<div style="padding-top: 10px">
     <lable >英文</lable>
     <textarea id="longDesc-en" style="width:450px; height: 150px; margin-left: 10px;" row="1"></textarea>
 </div>
