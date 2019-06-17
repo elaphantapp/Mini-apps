@@ -21,9 +21,8 @@ var createDidInfo = (key, value, did) => {
     }
 }
 
-var uploadMemo = (accId, accSecret, key, value, seed, privateKey) => {
-    var masterPublicKey = getMasterPublicKey(seed)
-    var publicKey = generateSubPublicKey(masterPublicKey, EXTERNAL_CHAIN, 0).toString('hex')
+var uploadMemo = (accId, accSecret, key, value, privateKey) => {
+    var publicKey = getPublicKeyFromPrivateKey(privateKey)
     var did = getDid(publicKey).toString()
 
     var didInfo = JSON.stringify(createDidInfo(key, value, did))
@@ -98,5 +97,9 @@ const setInfo = (accId, accSecret, key, value, mnemonic) => {
     var seed = getSeedFromMnemonic(mnemonic)
     var privateKey = generateSubPrivateKey(seed, COIN_TYPE_ELA, EXTERNAL_CHAIN, 0).toString('hex')
 
-    return uploadMemo(accId, accSecret, key, value, seed, privateKey)
+    return uploadMemo(accId, accSecret, key, value, privateKey)
+}
+
+const setInfoByPrivkey = (accId, accSecret, key, value, privateKey) => {
+    return uploadMemo(accId, accSecret, key, value, privateKey)
 }

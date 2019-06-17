@@ -1,0 +1,154 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="CryptoJS/rollups/sha256.js"></script>
+<script src="CryptoJS/rollups/md5.js"></script>
+<script src="elastos-wallet-api.js"></script>
+<script src="did.js"></script>
+<script type="text/javascript">
+
+    const done = () => {
+        let file = document.getElementById("capsuleFile").files[0]
+        if (file === undefined) {
+            alert("请选择capsule文件！")
+            return
+        }
+
+        var reader = new FileReader()
+        reader.onload = event => {
+            var data = CryptoJS.enc.Latin1.parse(event.target.result)
+            var hash = CryptoJS.SHA256(data).toString()
+            upload(hash)
+        }
+        reader.readAsBinaryString(file)
+    }
+
+    const upload = hash => {
+        let appname = document.getElementById("appname").value
+        if (appname == "") {
+            alert("请输入应用名称")
+            return
+        }
+
+        let platform = ""
+        let radios = document.getElementsByName('platform');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                platform = radios[i].value
+                break
+            }
+        }
+        if (platform == "") {
+            alert("请选择平台")
+            return
+        }
+
+        let version = document.getElementById("version").value
+        if (version == "") {
+            alert("请输入版本号")
+            return
+        }
+
+        let url = document.getElementById("url").value
+        if (url == "") {
+            alert("请输入下载链接")
+            return
+        }
+
+        let mne = document.getElementById("mnemonic").value
+
+        let privkey = document.getElementById("privkey").value
+        if (mne == "" && privkey == "") {
+            alert("请输入开发者助记词或者私钥")
+            return
+        }
+
+        let key = "Dev/" + appname + "/Release/" + platform + "/" + version
+
+        let release = {
+            "url": url,
+            "hash": hash
+        }
+
+        alert(key)
+        alert(JSON.stringify(release))
+
+        if (mne != "") {
+            setInfo(accId, accSecret, key, JSON.stringify(release), mne)
+                .then(ret => {
+                    document.getElementById("pubkeyTxid").innerHTML = "Txid: " + ret.txid
+                })
+        } else {
+            setInfoByPrivkey(accId, accSecret, key, JSON.stringify(release), privkey)
+                .then(ret => {
+                    document.getElementById("pubkeyTxid").innerHTML = "Txid: " + ret.txid
+                })
+        }
+
+
+    }
+
+</script>
+<style>
+    textarea {
+        font-size: 20px;
+        vertical-align: middle;
+    }
+
+    lable {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+</style>
+</head>
+<body>
+
+<input type="file" id="capsuleFile"/>
+
+<br/>
+<br/>
+
+<div>
+    <label>AppName</label>
+    <textarea id="appname" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<form action="" method="get" style="margin-top: 20px">
+    <p style="font-size: 22px">Platform</p>
+    <label><input name="platform" type="radio" value="Web" />Web </label>
+    <label><input name="platform" type="radio" value="H5" />H5 </label>
+</form>
+
+<div style="padding-top: 20px">
+    <lable >Version</lable>
+    <textarea id="version" style="width:100px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+<br/>
+
+<div>
+    <label>Capsule Download Url</label>
+    <textarea id="url" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<br/>
+
+<div>
+    <label>Developer Mnemonic</label>
+    <textarea id="mnemonic" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+<br/>
+
+<div>
+    <label>Developer Private Key</label>
+    <textarea id="privkey" style="width:450px; height: 60px; margin-left: 10px;" row="1"></textarea>
+</div>
+
+<br/>
+<button type="button" onclick="done()" style="width:100px; height:30px;">完成</button>
+
+<p id="pubkeyTxid" style="word-wrap:break-word;"></p>
+
+</body>
+</html>

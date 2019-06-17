@@ -34,6 +34,22 @@ window.getDid = publicKey => {
     return getDid(publicKey)
 }
 
+window.getSinglePrivateKey = seed => {
+  return getSinglePrivateKey(seed).toString('hex')
+}
+
+window.getSinglePublicKey = seed => {
+  return getSinglePublicKey(seed).toString('hex')
+}
+
+window.getPublicKeyFromPrivateKey = priv => {
+  return getPublicKeyFromPrivateKey(priv).toString('hex')
+}
+
+window.getAddress = publicKey => {
+  return getAddress(publicKey)
+}
+
 window.getMasterPublicKey = seed => {
     return getMasterPublicKey(seed)
 }
