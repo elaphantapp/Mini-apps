@@ -2,10 +2,19 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="filesaver/FileSaver.min.js"></script>
+<script src="jszip/jszip.min.js"></script>
 <script type="text/javascript">
+    var iconFolder
+    var bannerFolder
+
+    var fileArray = new Array()
+    var folderArray = new Array()
+    var index = 0
+
+    var capsule = {}
 
     const done = () => {
-        var capsule = {}
         var appname = document.getElementById("appname-default").value
         var appNameEn = document.getElementById("appname-en").value
         var appNameCn = document.getElementById("appname-cn").value
@@ -36,19 +45,22 @@
         capsule.did = did
         capsule.publicKey = publickey
 
-        capsule.icon = document.getElementById("icon-default").value
-        capsule.icon_xhdpi = document.getElementById("icon-1x").value
-        capsule.icon_xxhdpi = document.getElementById("icon-2x").value
-        capsule.icon_xxxhdpi = document.getElementById("icon-3x").value
+        getFile("icon-default", "icon", "icon")
 
-        capsule.banner = document.getElementById("banner-default").value
-        capsule.banner_en_xhdpi = document.getElementById("banner-en-1x").value
-        capsule.banner_en_xxhdpi = document.getElementById("banner-en-2x").value
-        capsule.banner_en_xxxhdpi = document.getElementById("banner-en-3x").value
+        getFile("icon-1x", "icon", "icon_xhdpi")
+        getFile("icon-2x", "icon", "icon_xxhdpi")
+        getFile("icon-2x", "icon", "icon_xxxhdpi")
 
-        capsule.banner_zh_CN_xhdpi = document.getElementById("banner-cn-1x").value
-        capsule.banner_zh_CN_xxhdpi = document.getElementById("banner-cn-2x").value
-        capsule.banner_zh_CN_xxxhdpi = document.getElementById("banner-cn-3x").value
+
+        getFile("banner-default", "banner", "banner")
+
+        getFile("banner-en-1x", "banner", "banner_en_xhdpi")
+        getFile("banner-en-2x", "banner", "banner_en_xxhdpi")
+        getFile("banner-en-3x", "banner", "banner_en_xxxhdpi")
+
+        getFile("banner-cn-1x", "banner", "banner_cn_xhdpi")
+        getFile("banner-cn-2x", "banner", "banner_cn_xxhdpi")
+        getFile("banner-cn-3x", "banner", "banner_cn_xxxhdpi")
 
         capsule.shortDesc = document.getElementById("shortDesc-default").value
         capsule.shortDesc_en = document.getElementById("shortDesc-en").value
@@ -101,10 +113,60 @@
             capsule.hash = document.getElementById("hash").value
         }
 
-        document.getElementById("capsule").innerHTML = JSON.stringify(capsule)
+        let jsonstr = JSON.stringify(capsule, null, 4)
+        console.log(jsonstr)
+        var capsuleName = document.getElementById("filename").value
+        if (capsuleName == "") {
+            alert("请输入capsule文件名")
+            return
+        }
+
+        var zip = new JSZip()
+        zip.file("app.json", jsonstr)
+
+        iconFolder = zip.folder("icon")
+        bannerFolder = zip.folder("banner")
+
+        try {
+            readFiles().then( () => {
+                    zip.generateAsync({type:"blob"})
+                        .then(function(content) {
+                            // see FileSaver.js
+                            saveAs(content, capsuleName + ".capsule");
+                        });
+
+                })
+
+        } catch (e) {
+            console.log(e)
+        }
 
     }
 
+    const getFile = (id, folder, key) => {
+        let file = document.getElementById(id).files[0]
+        if (file === undefined) return
+
+        capsule[key] = folder + "/" + file.name
+        folderArray[index] = folder
+        fileArray[index] = file
+        index++
+    }
+
+    async function readFiles() {
+        for (var i = 0; i < index; i++) {
+            let data = await new Promise(resolve => {
+                const reader = new FileReader()
+                reader.onload = evt => resolve(evt.target.result)
+                reader.readAsBinaryString(fileArray[i])
+            })
+            if (folderArray[i] == 'icon') {
+                iconFolder.file(fileArray[i].name, data, {binary: true})
+            } else {
+                bannerFolder.file(fileArray[i].name, data, {binary: true})
+            }
+        }
+    }
 
 </script>
 <style>
@@ -158,58 +220,58 @@
 
 <div >
     <lable >default</lable>
-    <textarea id="icon-default" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+    <input type="file" id="icon-default"/>
 </div>
 
 <div  style="padding-top: 10px">
     <lable >xhdpi</lable>
-    <textarea id="icon-1x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="icon-1x"/>
 </div>
 
 <div style="padding-top: 10px">
     <lable >xxhdpi</lable>
-    <textarea id="icon-2x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="icon-2x"/>
 </div>
 <div style="padding-top: 10px">
     <lable >xxxhdpi</lable>
-    <textarea id="icon-3x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="icon-3x"/>
 </div>
 
 
 <p style="font-size: 22px">banner包内路径</p>
 <div >
     <lable >default</lable>
-    <textarea id="banner-default" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
+    <input type="file" id="banner-default"/>
 </div>
 
 <p>英文</p>
 <div>
     <lable >xhdpi</lable>
-    <textarea id="banner-en-1x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="banner-en-1x"/>
 </div>
 
 <div style="padding-top: 10px">
     <lable >xxhdpi</lable>
-    <textarea id="banner-en-2x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="banner-en-2x"/>
 </div>
 <div style="padding-top: 10px">
     <lable >xxxhdpi</lable>
-    <textarea id="banner-en-3x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="banner-en-3x"/>
 </div>
 
 <p>中文</p>
 <div>
     <lable >xhdpi</lable>
-    <textarea id="banner-cn-1x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="banner-cn-1x"/>
 </div>
 
 <div style="padding-top: 10px">
     <lable >xxhdpi</lable>
-    <textarea id="banner-cn-2x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="banner-cn-2x"/>
 </div>
 <div style="padding-top: 10px">
     <lable >xxxhdpi</lable>
-    <textarea id="banner-cn-3x" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+    <input type="file" id="banner-cn-3x"/>
 </div>
 
 <div style="padding-top: 20px">
@@ -300,14 +362,15 @@
     <textarea id="hash" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
 </div>
 
+<div style="padding-top: 20px">
+    <lable >capsule文件名</lable>
+    <textarea id="filename" style="width:200px; height: 30px; margin-left: 10px;" row="1"></textarea>
+</div>
+
 <br/>
 <div>
 <button type="button" onclick="done()" style="width:100px; height:30px;">完成</button>
 </div>
-
-<br/>
-<p style="font-size: 22px">capsule</p>
-<p id="capsule"></p>
 
 <br/>
 <br/>
