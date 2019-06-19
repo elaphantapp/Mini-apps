@@ -1,0 +1,83 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="elastos-wallet-api-min.js"></script>
+<script type="text/javascript">
+
+    const done = () => {
+        clean()
+
+        var mne = document.getElementById("mnemonic").value
+        if (mne == "") {
+            alert("Please input mnemonic")
+            return
+        }
+
+        var seed = getSeedFromMnemonic(mne)
+
+        document.getElementById("privkey").innerHTML = getSinglePrivateKey(seed)
+
+        var pubkey = getSinglePublicKey(seed)
+        document.getElementById("pubkey").innerHTML = pubkey
+
+        document.getElementById("addr").innerHTML = getAddress(pubkey)
+    }
+
+    const clean = () => {
+        document.getElementById("privkey").innerHTML = ''
+        document.getElementById("pubkey").innerHTML = ''
+        document.getElementById("addr").innerHTML = ''
+    }
+
+</script>
+
+<style>
+    textarea {
+        font-size: 20px;
+        vertical-align: middle;
+    }
+
+    lable {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+</style>
+</head>
+<body>
+
+<p style="font-size: 24px;">查询钱包地址</p>
+<p style="font-size: 24px;">Get wallet address</p>
+
+<div>
+    <lable >Mnemonic</lable>
+    <textarea id="mnemonic" style="width:800px; height: 30px; padding-left: 10px;" row="1"></textarea>
+</div>
+<br/>
+<div>
+<button type="button" onclick="done()" style="width:100px; height:30px;">点击获取</button>
+</div>
+
+<br/>
+
+<div>
+    <lable >PrivateKey</lable>
+    <lable id="privkey" style="margin-left: 20px;"></lable>
+</div>
+
+<br/>
+
+<div>
+    <lable >PublicKey</lable>
+    <lable id="pubkey" style="margin-left: 20px;"></lable>
+</div>
+<br/>
+
+<div>
+    <lable >Address</lable>
+    <lable id="addr" style="margin-left: 20px;"></lable>
+</div>
+
+</body>
+</html>
