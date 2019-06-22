@@ -2,16 +2,18 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="CryptoJS/rollups/sha256.js"></script>
-<script src="CryptoJS/rollups/md5.js"></script>
-<script src="elastos-wallet-api.js"></script>
-<script src="did.js"></script>
+<link rel="stylesheet" href="css/bootstrap-3.3.7.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/CryptoJS/rollups/sha256.js"></script>
+<script src="js/CryptoJS/rollups/md5.js"></script>
+<script src="js/elastos-wallet-api-min.js"></script>
+<script src="js/did.js"></script>
 <script type="text/javascript">
 
     const done = () => {
         let file = document.getElementById("capsuleFile").files[0]
         if (file === undefined) {
-            alert("请选择capsule文件！")
+            alert("Please choose a capsule file！")
             return
         }
 
@@ -27,7 +29,7 @@
     const upload = hash => {
         let appname = document.getElementById("appname").value
         if (appname == "") {
-            alert("请输入应用名称")
+            alert("Please input app name!")
             return
         }
 
@@ -40,19 +42,19 @@
             }
         }
         if (platform == "") {
-            alert("请选择平台")
+            alert("Please choose a platform!")
             return
         }
 
         let version = document.getElementById("version").value
         if (version == "") {
-            alert("请输入版本号")
+            alert("Please input version")
             return
         }
 
         let url = document.getElementById("url").value
         if (url == "") {
-            alert("请输入下载链接")
+            alert("Please input capsule download url!")
             return
         }
 
@@ -60,7 +62,7 @@
 
         let privkey = document.getElementById("privkey").value
         if (mne == "" && privkey == "") {
-            alert("请输入开发者助记词或者私钥")
+            alert("Please input developer's mnemonic or private key!")
             return
         }
 
@@ -105,50 +107,79 @@
 </head>
 <body>
 
-<input type="file" id="capsuleFile"/>
+<div class="container">
+    <h1 class="text-center">Upload capsule release info</h1>
+    <hr>
 
-<br/>
-<br/>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <input type="file" id="capsuleFile"/>
+        </div>
 
-<div>
-    <label>AppName</label>
-    <textarea id="appname" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
+        <div class="form-group">
+            <label for="phrase" class="col-sm-2 control-label">App name</label>
+            <div class="col-sm-10">
+                <textarea id="appname" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phrase" class="col-sm-2 control-label">Version</label>
+            <div class="col-sm-10">
+                <textarea id="version" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phrase" class="col-sm-2 control-label">Capsule download url</label>
+            <div class="col-sm-10">
+                <textarea id="url" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phrase" class="col-sm-2 control-label">Developer's mnemonic</label>
+            <div class="col-sm-10">
+                <textarea id="mnemonic" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phrase" class="col-sm-2 control-label">Developer's private key</label>
+            <div class="col-sm-10">
+                <textarea id="privkey" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-10">
+                <p>Fill in mnemonic or private key</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p style="font-size: 22px">Platform</p>
+            <label class="radio-inline">
+                <input type="radio"  value="Web" name="platform">Web
+            </label>
+            <label class="radio-inline">
+                <input type="radio"  value="H5" name="platform">H5
+            </label>
+            <label class="radio-inline">
+                <input type="radio"  value="Android" name="platform">Android
+            </label>
+            <label class="radio-inline">
+                <input type="radio"  value="iOS" name="platform">iOS
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-success" onclick="done()">Upload</button>
+        </div>
+
+        <p id="pubkeyTxid" style="word-wrap:break-word;"></p>
+    </form>
+
 </div>
-
-<form action="" method="get" style="margin-top: 20px">
-    <p style="font-size: 22px">Platform</p>
-    <label><input name="platform" type="radio" value="Web" />Web </label>
-    <label><input name="platform" type="radio" value="H5" />H5 </label>
-</form>
-
-<div style="padding-top: 20px">
-    <lable >Version</lable>
-    <textarea id="version" style="width:100px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
-<br/>
-
-<div>
-    <label>Capsule Download Url</label>
-    <textarea id="url" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
-
-<br/>
-
-<div>
-    <label>Developer Mnemonic</label>
-    <textarea id="mnemonic" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
-<br/>
-
-<div>
-    <label>Developer Private Key</label>
-    <textarea id="privkey" style="width:450px; height: 60px; margin-left: 10px;" row="1"></textarea>
-</div>
-
-<br/>
-<button type="button" onclick="done()" style="width:100px; height:30px;">完成</button>
-
-<p id="pubkeyTxid" style="word-wrap:break-word;"></p>
-
 </body>
 </html>

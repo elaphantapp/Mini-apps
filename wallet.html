@@ -1,34 +1,83 @@
 <html>
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="elastos-wallet-api-min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" href="css/bootstrap-3.3.7.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/elastos-wallet-api-min.js"></script>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/bootstrap-3.3.7.js"></script>
+    <script src="js/did.js"></script>
+    <script src="js/CryptoJS/rollups/md5.js"></script>
 <script type="text/javascript">
 
-    const done = () => {
-        clean()
+    var phraseChangeTimeoutEvent
+    var phrase
 
-        var mne = document.getElementById("mnemonic").value
-        if (mne == "") {
-            alert("Please input mnemonic")
-            return
-        }
-
-        var seed = getSeedFromMnemonic(mne)
-
-        document.getElementById("privkey").innerHTML = getSinglePrivateKey(seed)
-
-        var pubkey = getSinglePublicKey(seed)
-        document.getElementById("pubkey").innerHTML = pubkey
-
-        document.getElementById("addr").innerHTML = getAddress(pubkey)
-    }
+    var appnameChangedTimeoutEvent
+    var appname
 
     const clean = () => {
         document.getElementById("privkey").innerHTML = ''
         document.getElementById("pubkey").innerHTML = ''
         document.getElementById("addr").innerHTML = ''
     }
+
+    const generate = () => {
+        var mnemonic = generateMnemonic()
+        phrase.val(mnemonic)
+        phraseChangeTimeoutEvent = setTimeout(phraseChanged, 400);
+    }
+
+    const phraseChanged = () => {
+        var value = phrase.val()
+        if (value == "") return
+
+        var didjson = restoreDid(value)
+        $("#privkey").val(didjson.privateKey)
+        $("#pubkey").val(didjson.publicKey)
+        $("#did").val(didjson.did)
+        $("#addr").val(getAddress(didjson.publicKey))
+
+    }
+
+    const appNameChanged = () => {
+        var privekey = $("#privkey").val()
+        if (privekey == "") {
+            alert("Please input mnemonic or private key!")
+            return
+        }
+
+        var name = appname.val()
+        var appId = sign(name, privekey)
+        $("#appid").val(appId)
+
+        setInfoByPrivkey(accId, accSecret, "Dev/" + name + "/AppID", appId, privekey)
+        .then(ret => {
+            $("#txid").val(ret.txid)
+        })
+    }
+
+    $(document).ready(function(){
+        phrase = $('#mnemonic')
+        phrase.on('input', function() {
+            if (phraseChangeTimeoutEvent != null) {
+                clearTimeout(phraseChangeTimeoutEvent);
+            }
+            phraseChangeTimeoutEvent = setTimeout(phraseChanged, 400);
+
+        });
+
+        appname = $("#appname")
+        appname.on('input', function() {
+            if (appnameChangedTimeoutEvent != null) {
+                clearTimeout(appnameChangedTimeoutEvent);
+            }
+            appnameChangedTimeoutEvent = setTimeout(appNameChanged, 1000);
+
+        });
+    });
 
 </script>
 
@@ -47,37 +96,100 @@
 </head>
 <body>
 
-<p style="font-size: 24px;">查询钱包地址</p>
-<p style="font-size: 24px;">Get wallet address</p>
+    <div class="container">
+        <h1 class="text-center">Mnemonic</h1>
+        <hr>
 
-<div>
-    <lable >Mnemonic</lable>
-    <textarea id="mnemonic" style="width:800px; height: 30px; padding-left: 10px;" row="1"></textarea>
-</div>
-<br/>
-<div>
-<button type="button" onclick="done()" style="width:100px; height:30px;">点击获取</button>
-</div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Mnemonic</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <p>You can enter an existing BIP39 mnemonic, or generate a new random one. </p>
+                            <button type="button" class="btn generate" onclick="generate()"><b>GENERATE</b></button>
+                        </div>
+                    </div>
 
-<br/>
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">Mnemonic</label>
+                        <div class="col-sm-10">
+                            <textarea id="mnemonic" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<div>
-    <lable >PrivateKey</lable>
-    <lable id="privkey" style="margin-left: 20px;"></lable>
-</div>
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">Private key</label>
+                        <div class="col-sm-10">
+                            <textarea id="privkey" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<br/>
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">Public key</label>
+                        <div class="col-sm-10">
+                            <textarea id="pubkey" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<div>
-    <lable >PublicKey</lable>
-    <lable id="pubkey" style="margin-left: 20px;"></lable>
-</div>
-<br/>
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">Address</label>
+                        <div class="col-sm-10">
+                            <textarea id="addr" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<div>
-    <lable >Address</lable>
-    <lable id="addr" style="margin-left: 20px;"></lable>
-</div>
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">Did</label>
+                        <div class="col-sm-10">
+                            <textarea id="did" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>AppID</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <p>You can enter an app name to generate the app id. And the app id will be written on did chain.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">App Name</label>
+                        <div class="col-sm-10">
+                            <textarea id="appname" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">App ID</label>
+                        <div class="col-sm-10">
+                            <textarea id="appid" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label">txid</label>
+                        <div class="col-sm-10">
+                            <textarea id="txid" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>

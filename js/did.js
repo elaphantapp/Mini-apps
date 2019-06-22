@@ -69,7 +69,7 @@ var uploadMemo = (accId, accSecret, key, value, privateKey) => {
         return {}
     })
     .catch(function(error) {
-        console.log(error);
+        alert(error)
     })
 }
 
