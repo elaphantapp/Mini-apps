@@ -2,8 +2,13 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script src="js/filesaver/FileSaver.min.js"></script>
-<script src="js/jszip/jszip.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-3.3.7.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/bootstrap-3.3.7.js"></script>
+    <script src="js/filesaver/FileSaver.min.js"></script>
+    <script src="js/jszip/jszip.min.js"></script>
+
 <script type="text/javascript">
     var iconFolder
     var bannerFolder
@@ -183,197 +188,300 @@
 </style>
 </head>
 <body>
+    <div class="container">
+        <h1 class="text-center">Generate capsule</h1>
+        <hr>
 
-<p style="font-size: 22px">应用名称</p>
-<div >
-    <lable >default</lable>
-    <textarea id="appname-default" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
-</div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>App Info</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="appname-default" class="text-danger col-sm-2 control-label">Default(*)</label>
+                        <div class="col-sm-10">
+                            <textarea id="appname-default" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<div style="padding-top: 10px">
-    <lable >英文</lable>
-    <textarea id="appname-en" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
-</div>
+                    <div class="form-group">
+                        <label for="appname-en" class="col-sm-2 control-label">English</label>
+                        <div class="col-sm-10">
+                            <textarea id="appname-en" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<div style="padding-top: 10px">
-    <lable >中文</lable>
-    <textarea id="appname-cn" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
-</div>
+                    <div class="form-group">
+                        <label for="appname-cn" class="col-sm-2 control-label">Simple Chinese</label>
+                        <div class="col-sm-10">
+                            <textarea id="appname-cn" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<div style="padding-top: 10px">
-    <lable >appId</lable>
-    <textarea id="appid" style="width:450px; height: 60px; padding-left: 10px;" row="1"></textarea>
-</div>
+                    <div class="form-group">
+                        <label for="appid" class="text-danger col-sm-2 control-label">AppID(*)</label>
+                        <div class="col-sm-10">
+                            <textarea id="appid" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<p style="font-size: 22px">开发者信息</p>
-<div>
-    <lable >DID</lable>
-    <textarea id="did" style="width:450px; height: 30px; padding-left: 10px;" row="1"></textarea>
-</div>
+                </form>
+            </div>
+        </div>
 
-<div style="padding-top: 10px">
-    <lable >公钥</lable>
-    <textarea id="publickey" style="width:450px; height: 60px; padding-left: 10px;" row="1"></textarea>
-</div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Developer Info</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="did" class="text-danger col-sm-2 control-label">DID(*)</label>
+                        <div class="col-sm-10">
+                            <textarea id="did" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<p style="font-size: 22px">图标包内路径</p>
+                    <div class="form-group">
+                        <label for="publickey" class="text-danger col-sm-2 control-label">Public Key(*)</label>
+                        <div class="col-sm-10">
+                            <textarea id="publickey" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
 
-<div >
-    <lable >default</lable>
-    <input type="file" id="icon-default"/>
-</div>
+                </form>
+            </div>
+        </div>
 
-<div  style="padding-top: 10px">
-    <lable >xhdpi</lable>
-    <input type="file" id="icon-1x"/>
-</div>
-
-<div style="padding-top: 10px">
-    <lable >xxhdpi</lable>
-    <input type="file" id="icon-2x"/>
-</div>
-<div style="padding-top: 10px">
-    <lable >xxxhdpi</lable>
-    <input type="file" id="icon-3x"/>
-</div>
-
-
-<p style="font-size: 22px">banner包内路径</p>
-<div >
-    <lable >default</lable>
-    <input type="file" id="banner-default"/>
-</div>
-
-<p>英文</p>
-<div>
-    <lable >xhdpi</lable>
-    <input type="file" id="banner-en-1x"/>
-</div>
-
-<div style="padding-top: 10px">
-    <lable >xxhdpi</lable>
-    <input type="file" id="banner-en-2x"/>
-</div>
-<div style="padding-top: 10px">
-    <lable >xxxhdpi</lable>
-    <input type="file" id="banner-en-3x"/>
-</div>
-
-<p>中文</p>
-<div>
-    <lable >xhdpi</lable>
-    <input type="file" id="banner-cn-1x"/>
-</div>
-
-<div style="padding-top: 10px">
-    <lable >xxhdpi</lable>
-    <input type="file" id="banner-cn-2x"/>
-</div>
-<div style="padding-top: 10px">
-    <lable >xxxhdpi</lable>
-    <input type="file" id="banner-cn-3x"/>
-</div>
-
-<div style="padding-top: 20px">
-    <lable >notificationUrl</lable>
-    <textarea id="notificationUrl" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Icon</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="icon-default" class="col-sm-2 control-label">default</label>
+                        <input type="file" id="icon-default"/>
+                    </div>
 
 
-<p style="font-size: 22px">shortDesc</p>
-<div >
-    <lable >default</lable>
-    <textarea id="shortDesc-default" style="width:450px; height: 100px; padding-left: 10px;" row="1"></textarea>
-</div>
+                    <div class="form-group">
+                        <label for="icon-default" class="col-sm-2 control-label">xhdpi</label>
+                        <input type="file" id="icon-1x"/>
+                    </div>
 
-<div style="padding-top: 10px">
-    <lable >英文</lable>
-    <textarea id="shortDesc-en" style="width:450px; height: 100px; margin-left: 10px;" row="1"></textarea>
-</div>
-
-<div style="padding-top: 10px">
-    <lable >中文</lable>
-    <textarea id="shortDesc-cn" style="width:450px; height: 100px; margin-left: 10px;" row="1"></textarea>
-</div>
-
-<p style="font-size: 22px">longDesc</p>
-<div >
-    <lable >default</lable>
-    <textarea id="longDesc-default" style="width:450px; height: 100px; padding-left: 10px;" row="1"></textarea>
-</div>
-<div style="padding-top: 10px">
-    <lable >英文</lable>
-    <textarea id="longDesc-en" style="width:450px; height: 150px; margin-left: 10px;" row="1"></textarea>
-</div>
-
-<div style="padding-top: 10px">
-    <lable >中文</lable>
-    <textarea id="longDesc-cn" style="width:450px; height: 150px; margin-left: 10px;" row="1"></textarea>
-</div>
-
-<form action="" method="get" style="margin-top: 20px">
-<p style="font-size: 22px">分类</p>
-<label><input name="category" type="radio" value="game" />game </label>
-<label><input name="category" type="radio" value="health" />health </label>
-<label><input name="category" type="radio" value="map" />map </label>
-<label><input name="category" type="radio" value="food" />food </label>
-<label><input name="category" type="radio" value="business" />business </label>
-<label><input name="category" type="radio" value="beauty" />beauty </label>
-<label><input name="category" type="radio" value="education" />education </label>
-<label><input name="category" type="radio" value="books" />books </label>
-<label><input name="category" type="radio" value="entertainment" />entertainment </label>
-<label><input name="category" type="radio" value="lifestyle" />lifestyle </label>
-<label><input name="category" type="radio" value="events" />events </label>
-<label><input name="category" type="radio" value="home" />home </label>
-<label><input name="category" type="radio" value="tools" />tools </label>
-</form>
-
-<form action="" method="get" style="margin-top: 20px">
-<p style="font-size: 22px">Platform</p>
-<label><input name="platform" type="radio" value="Web" />Web </label>
-<label><input name="platform" type="radio" value="H5" />H5 </label>
-</form>
+                    <div class="form-group">
+                        <label for="icon-default" class="col-sm-2 control-label">xxhdip</label>
+                        <input type="file" id="icon-2x"/>
+                    </div>
 
 
-<div style="padding-top: 20px">
-    <lable >版本号</lable>
-    <textarea id="version" style="width:100px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
+                    <div class="form-group">
+                        <label for="icon-default" class="col-sm-2 control-label">xxxhdpi</label>
+                        <input type="file" id="icon-3x"/>
+                    </div>
 
-<div style="padding-top: 20px">
-    <lable >ReleaseNote</lable>
-    <textarea id="releaseNote" style="width:450px; height: 150px; margin-left: 10px;" row="1"></textarea>
-</div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Banner</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="banner-default" class="col-sm-2 control-label">default</label>
+                        <input type="file" id="banner-default"/>
+                    </div>
 
 
-<div style="padding-top: 20px">
-    <lable >Url</lable>
-    <textarea id="url" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
+                    <div class="col-md-12">
+                        <h4>English</h4>
+                        <div class="form-group">
+                            <label for="banner-en-1x" class="col-sm-2 control-label">xhdpi</label>
+                            <input type="file" id="banner-en-1x"/>
+                        </div>
 
-<div style="padding-top: 20px">
-    <lable >H5运行包大小</lable>
-    <textarea id="size" style="width:100px; height: 30px; margin-left: 10px;" row="1"></textarea>
-    <lable >KB</lable>
-</div>
+                        <div class="form-group">
+                            <label for="banner-en-2x" class="col-sm-2 control-label">xxhdip</label>
+                            <input type="file" id="banner-en-2x"/>
+                        </div>
 
-<div style="padding-top: 20px">
-    <lable >H5运行包hash</lable>
-    <textarea id="hash" style="width:450px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
 
-<div style="padding-top: 20px">
-    <lable >capsule文件名</lable>
-    <textarea id="filename" style="width:200px; height: 30px; margin-left: 10px;" row="1"></textarea>
-</div>
+                        <div class="form-group">
+                            <label for="banner-en-3x" class="col-sm-2 control-label">xxxhdpi</label>
+                            <input type="file" id="banner-en-3x"/>
+                        </div>
+                    </div>
 
-<br/>
-<div>
-<button type="button" onclick="done()" style="width:100px; height:30px;">完成</button>
-</div>
+                    <div class="col-md-12">
+                        <h4>Simple Chinese</h4>
+                        <div class="form-group">
+                            <label for="banner-cn-1x" class="col-sm-2 control-label">xhdpi</label>
+                            <input type="file" id="banner-cn-1x"/>
+                        </div>
 
-<br/>
-<br/>
+                        <div class="form-group">
+                            <label for="banner-cn-2x" class="col-sm-2 control-label">xxhdip</label>
+                            <input type="file" id="banner-cn-2x"/>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="banner-cn-3x" class="col-sm-2 control-label">xxxhdpi</label>
+                            <input type="file" id="banner-cn-3x"/>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Detail Info</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="notificationUrl" class="col-sm-2 control-label">Notification url</label>
+                        <div class="col-sm-10">
+                            <textarea id="notificationUrl" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h4>Short description</h4>
+
+                         <div class="form-group">
+                            <label for="shortDesc-default" class="col-sm-2 control-label">default</label>
+                            <div class="col-sm-10">
+                                <textarea id="shortDesc-default" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shortDesc-default" class="col-sm-2 control-label">English</label>
+                            <div class="col-sm-10">
+                                <textarea id="shortDesc-en" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shortDesc-default" class="col-sm-2 control-label">Simple Chinese</label>
+                            <div class="col-sm-10">
+                                <textarea id="shortDesc-cn" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <h4>Long description</h4>
+
+                         <div class="form-group">
+                            <label for="longDesc-default" class="col-sm-2 control-label">default</label>
+                            <div class="col-sm-10">
+                                <textarea id="longDesc-default" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="longDesc-default" class="col-sm-2 control-label">English</label>
+                            <div class="col-sm-10">
+                                <textarea id="longDesc-en" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="longDesc-default" class="col-sm-2 control-label">Simple Chinese</label>
+                            <div class="col-sm-10">
+                                <textarea id="longDesc-cn" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h4 class="text-danger">Category(*)</h4>
+                        <label class="radio-inline"><input name="category" type="radio" value="game" />game </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="health" />health </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="map" />map </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="food" />food </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="business" />business </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="beauty" />beauty </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="education" />education </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="books" />books </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="entertainment" />entertainment </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="lifestyle" />lifestyle </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="events" />events </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="home" />home </label>
+                        <label class="radio-inline"><input name="category" type="radio" value="tools" />tools </label>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h4 class="text-danger">Platform(*)</h4>
+                        <label class="radio-inline">
+                            <input type="radio"  value="Web" name="platform">Web
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio"  value="H5" name="platform">H5
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio"  value="Android" name="platform">Android
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio"  value="iOS" name="platform">iOS
+                        </label>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+        <dev class="row">
+            <div class="col-md-12">
+                <h2>Release Info</h2>
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label for="version" class="text-danger col-sm-2 control-label">Version(*)</label>
+                        <div class="col-sm-10">
+                            <textarea id="version" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="releaseNote" class="col-sm-2 control-label">ReleaseNote</label>
+                        <div class="col-sm-10">
+                            <textarea id="releaseNote" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="url" class="text-danger col-sm-2 control-label">Url(*)</label>
+                        <div class="col-sm-10">
+                            <textarea id="url" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hash" class="col-sm-2 control-label">H5 runtime file hash</label>
+                        <div class="col-sm-10">
+                            <textarea id="hash" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filename" class="text-danger col-sm-2 control-label">Capsule file name(*)</label>
+                        <div class="col-sm-10">
+                            <textarea id="filename" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </dev>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-success" onclick="done()">Done</button>
+        </div>
+
+    </div>
 
 </body>
 </html>
