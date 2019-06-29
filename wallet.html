@@ -15,9 +15,6 @@
     var phraseChangeTimeoutEvent
     var phrase
 
-    var appnameChangedTimeoutEvent
-    var appname
-
     const clean = () => {
         document.getElementById("privkey").innerHTML = ''
         document.getElementById("pubkey").innerHTML = ''
@@ -42,14 +39,14 @@
 
     }
 
-    const appNameChanged = () => {
+    const generateAppID = () => {
         var privekey = $("#privkey").val()
         if (privekey == "") {
             alert("Please input mnemonic or private key!")
             return
         }
 
-        var name = appname.val()
+        var name = $("#appname").val()
         var appId = sign(name, privekey)
         $("#appid").val(appId)
 
@@ -57,6 +54,29 @@
         .then(ret => {
             $("#txid").val(ret.txid)
         })
+    }
+
+    const doverify = () => {
+        var srcdata = $("#srcdata").val()
+        if (srcdata == "") {
+            alert("Please input source data!")
+            return
+        }
+
+        var signed = $("#signeddata").val()
+        if (signed == "") {
+            alert("Please input signed data!")
+            return
+        }
+
+        var pubkey = $("#verifypub").val()
+        if (pubkey == "") {
+            alert("Please input public key!")
+            return
+        }
+
+        var ret = verify(srcdata, signed, pubkey)
+        alert(ret)
     }
 
     $(document).ready(function(){
@@ -69,14 +89,6 @@
 
         });
 
-        appname = $("#appname")
-        appname.on('input', function() {
-            if (appnameChangedTimeoutEvent != null) {
-                clearTimeout(appnameChangedTimeoutEvent);
-            }
-            appnameChangedTimeoutEvent = setTimeout(appNameChanged, 1000);
-
-        });
     });
 
 </script>
@@ -172,6 +184,15 @@
                     </div>
 
                     <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <button type="button" class="btn btn-success" onclick="generateAppID()">Generate</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phrase" class="col-sm-2 control-label"></label>
+                    </div>
+
+                    <div class="form-group">
                         <label for="phrase" class="col-sm-2 control-label">App ID</label>
                         <div class="col-sm-10">
                             <textarea id="appid" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
@@ -183,6 +204,48 @@
                         <div class="col-sm-10">
                             <textarea id="txid" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
                         </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Verify</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <p>You can enter source data, signed data and public key to verify the signature is valid.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="srcdata" class="col-sm-2 control-label">Source data</label>
+                        <div class="col-sm-10">
+                            <textarea id="srcdata" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signeddata" class="col-sm-2 control-label">Signed data</label>
+                        <div class="col-sm-10">
+                            <textarea id="signeddata" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="verifypub" class="col-sm-2 control-label">Public Key</label>
+                        <div class="col-sm-10">
+                            <textarea id="verifypub" class="phrase private-data form-control" data-show-qr autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <button type="button" class="btn btn-success" onclick="doverify()">Verify</button>
                     </div>
 
                 </form>
