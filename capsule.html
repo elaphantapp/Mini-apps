@@ -150,9 +150,13 @@
 
     const getFile = (id, folder, key) => {
         let file = document.getElementById(id).files[0]
-        if (file === undefined) return
+        if (file === undefined) {
+            capsule[key] = ""
+            return
+        } else {
+            capsule[key] = folder + "/" + file.name
+        }
 
-        capsule[key] = folder + "/" + file.name
         folderArray[index] = folder
         fileArray[index] = file
         index++
