@@ -15,6 +15,9 @@
     var phraseChangeTimeoutEvent
     var phrase
 
+    var publicKeyChangeTimeoutEvent
+    var publicKey
+
     const clean = () => {
         document.getElementById("privkey").innerHTML = ''
         document.getElementById("pubkey").innerHTML = ''
@@ -37,6 +40,14 @@
         $("#did").val(didjson.did)
         $("#addr").val(getAddress(didjson.publicKey))
 
+    }
+
+    const pubkeyChanged = () => {
+        var value = publicKey.val()
+        if (value == "") return
+
+        $("#addr").val(getAddress(value))
+        $("#did").val(getDid(value))
     }
 
     const generateAppID = () => {
@@ -86,6 +97,15 @@
                 clearTimeout(phraseChangeTimeoutEvent);
             }
             phraseChangeTimeoutEvent = setTimeout(phraseChanged, 400);
+
+        });
+
+        publicKey = $('#pubkey')
+        publicKey.on('input', function() {
+            if (publicKeyChangeTimeoutEvent != null) {
+                clearTimeout(publicKeyChangeTimeoutEvent);
+            }
+            publicKeyChangeTimeoutEvent = setTimeout(pubkeyChanged, 400);
 
         });
 
