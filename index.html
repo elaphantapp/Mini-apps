@@ -12,7 +12,7 @@
         $(document).ready(function() {
 
             $("a").click(function(e) {
-                if ($.id != "helpen-tab" && $.id != "helpcn-tab") {
+                if ($(this).id != "helpen-tab" && $(this).id != "helpcn-tab") {
                     e.preventDefault();
                     $("#content").attr("src", $(this).attr("href"));
                 }
