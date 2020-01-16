@@ -12,9 +12,10 @@
         $(document).ready(function() {
 
             $("a").click(function(e) {
-                e.preventDefault();
-
-                $("#content").attr("src", $(this).attr("href"));
+                if ($.id != "helpen-tab" && $.id != "helpcn-tab") {
+                    e.preventDefault();
+                    $("#content").attr("src", $(this).attr("href"));
+                }
             })
         });
     </script>
