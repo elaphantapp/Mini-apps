@@ -1,2 +1,2 @@
-# Elastos.Tools.Creator.Capsule
-generate capsule app.json
+
+https://elaphantapp.github.io/Mini-apps/
