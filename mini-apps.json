@@ -36,7 +36,7 @@
       "labels": ["tools"]
     },
     {
-      "name_en\\": "Community",
+      "name": "Community",
       "name_zh_CN": "社区中心",
       "desc": "",
       "icon": "images/elapp.png",
@@ -47,7 +47,7 @@
       "name": "ELA News",
       "desc": "ELA NEWS is the all encompassing site for all information and updates concerning Elastos. ",
       "icon": "images/elanews.png",
-      "capsule": "elaphant://play.fishchain.io/res/fishchain.capsule",
+      "capsule": "elaphant://elanews.net/ELANews01.capsule",
       "labels": ["news"]
     },
     {
