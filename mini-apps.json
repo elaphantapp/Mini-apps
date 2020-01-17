@@ -72,6 +72,14 @@
       "icon": "images/swft.png",
       "capsule": "elaphant://swft.elabank.net/swft.capsule",
       "labels": ["tools","finance"]
+    },
+    {
+      "name": "Easy Transfer",
+      "name_zh_CN":"轻松转",
+      "shortDesc_en":"A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
+      "icon": "icon/transfer.png",
+      "capsule": "elaphant://transfer.elaphant.app/transfer.capsule",
+      "labels": ["tools"]
     }
   ]
 }
