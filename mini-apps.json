@@ -7,7 +7,7 @@
       "name_zh_CN": "给我投票",
       "shortDesc": "A mini voting program, you can create a topic for voting, you can vote your favorite options.",
       "shortDesc_en": "A mini voting program, you can create a topic for voting, you can vote your favorite options.",
-      "shortDesc_zh_CN": "A mini voting program, you can create a topic for voting, you can vote your favorite options.",
+      "shortDesc_zh_CN": "一个投票小程序，您可以创建一个投票主题，也可以选择您喜欢的选项来投票。",
       "icon": "images/voteforme.png",
       "capsule": "elaphant://voteforme.elaphant.net/voteforme.capsule",
       "labels": ["tools"]
@@ -60,7 +60,7 @@
       "name_zh_CN": "ELA新闻",
       "shortDesc": "ELA NEWS is the all encompassing site for all information and updates concerning Elastos. ",
       "shortDesc_en": "ELA NEWS is the all encompassing site for all information and updates concerning Elastos. ",
-      "shortDesc_zh_CN": "ELA NEWS is the all encompassing site for all information and updates concerning Elastos. ",
+      "shortDesc_zh_CN": "ELA新闻是关于Elastos的所有信息和更新的全方位网站。",
       "icon": "images/elanews.png",
       "capsule": "elaphant://elanews.net/ELANews01.capsule",
       "labels": ["news"]
@@ -80,7 +80,7 @@
       "name_zh_CN": "ELAnodes",
       "shortDesc": "One stop shop for supernode info.",
       "shortDesc_en": "One stop shop for supernode info.",
-      "shortDesc_zh_CN": "One stop shop for supernode info.",
+      "shortDesc_zh_CN": "一站式提供超级节点信息。",
       "icon": "starfish.png",
       "capsule": "elaphant://elanodes.com/capsules/1.2.capsule",
       "labels": ["tools"]
@@ -101,8 +101,8 @@
       "name_en": "Easy Transfer",
       "name_zh_CN":"轻松转",
       "shortDesc":"A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
-      "shortDesc_en": "",
-      "shortDesc_zh_CN": "",
+      "shortDesc_en": "A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
+      "shortDesc_zh_CN": "支持ELA主链和侧链快速跨链转账",
       "icon": "icon/transfer.png",
       "capsule": "elaphant://transfer.elaphant.app/transfer.capsule",
       "labels": ["tools"]
