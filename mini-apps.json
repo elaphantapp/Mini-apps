@@ -102,7 +102,7 @@
       "name_zh_CN":"轻松转",
       "shortDesc":"A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
       "shortDesc_en": "A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
-      "shortDesc_zh_CN": "支持ELA主链和侧链快速跨链转账",
+      "shortDesc_zh_CN": "支持ELA主链和侧链快速跨链转账。",
       "icon": "icon/transfer.png",
       "capsule": "elaphant://transfer.elaphant.app/transfer.capsule",
       "labels": ["tools"]
