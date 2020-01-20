@@ -41,7 +41,7 @@
       "shortDesc":"In this H5 app,\n* You can vote your DPoS supernodes without sending your ELA out,\n* You can spend your ELA anytime after vote,\n* We will automatically help you keep your last votes using your balance when you spend your ELA.",
       "shortDesc_en":"In this H5 app,\n* You can vote your DPoS supernodes without sending your ELA out,\n* You can spend your ELA anytime after vote,\n* We will automatically help you keep your last votes using your balance when you spend your ELA.",
       "shortDesc_zh_CN":"在这个小程序里可以借助大象钱包对DPoS节点进行投票。您不必将ELA转出大象钱包即可参与DPoS选举投票，同时您还可以正常进行转账交易，不必担心之前的投票失效，因为每次转账交易都可以自动帮您投出上一次的选票。",
-      "icon": "",
+      "icon": "images/icon.jpg",
       "capsule": "elaphant://dposvote.elaphant.app/vote.capsule",
       "labels": ["tools"]
     },
@@ -103,7 +103,7 @@
       "shortDesc":"A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
       "shortDesc_en": "A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
       "shortDesc_zh_CN": "支持ELA主链和侧链快速跨链转账。",
-      "icon": "icon/transfer.png",
+      "icon": "images/transfer.png",
       "capsule": "elaphant://transfer.elaphant.app/transfer.capsule",
       "labels": ["tools"]
     }
