@@ -81,7 +81,7 @@
       "shortDesc": "One stop shop for supernode info.",
       "shortDesc_en": "One stop shop for supernode info.",
       "shortDesc_zh_CN": "一站式提供超级节点信息。",
-      "icon": "starfish.png",
+      "icon": "images/starfish.png",
       "capsule": "elaphant://elanodes.com/capsules/1.2.capsule",
       "labels": ["tools"]
     },
