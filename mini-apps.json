@@ -50,6 +50,8 @@
       "name_en": "Community",
       "name_zh_CN": "社区中心",
       "shortDesc": "",
+      "shortDesc_en": "",
+      "shortDesc_zh_CN": "",
       "icon": "images/elapp.png",
       "capsule": "elaphant://elaphant.app/elapp.capsule",
       "labels": ["media","news"]
@@ -69,7 +71,9 @@
       "name": "ELAFish",
       "name_en": "ELAFish",
       "name_zh_CN": "ELAFish",
-      "desc": "",
+      "shortDesc": "",
+      "shortDesc_en": "",
+      "shortDesc_zh_CN": "",
       "icon": "images/elafish.png",
       "capsule": "elaphant://play.fishchain.io/res/fishchain.capsule",
       "labels": ["game"]
