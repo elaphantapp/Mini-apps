@@ -1,0 +1,115 @@
+{
+  "versioin":1,
+  "mini-apps": [
+    {
+      "name": "Vote For Me",
+      "name_en": "Vote For Me",
+      "name_zh_CN": "给我投票",
+      "shortDesc": "A mini voting program, you can create a topic for voting, you can vote your favorite options.",
+      "shortDesc_en": "A mini voting program, you can create a topic for voting, you can vote your favorite options.",
+      "shortDesc_zh_CN": "一个投票小程序，您可以创建一个投票主题，也可以选择您喜欢的选项来投票。",
+      "icon": "images/voteforme.png",
+      "capsule": "elaphant://voteforme.elaphant.net/voteforme.capsule",
+      "labels": ["tools"]
+    },
+    {
+      "name":"ELA Bank vote",
+      "name_en":"ELA Bank vote wins reward",
+      "name_zh_CN":"ELA Bank投票赢奖励",
+      "shortDesc":"Earn ELA by voting the top bonus supernodes managed by ELA Bank! The bonus will be sent to your wallet by ELA Bank automatically. You may check the details on how the bonus is distributed at elabank.net.",
+      "shortDesc_en":"Earn ELA by voting the top bonus supernodes managed by ELA Bank! The bonus will be sent to your wallet by ELA Bank automatically. You may check the details on how the bonus is distributed at elabank.net.",
+      "shortDesc_zh_CN":"一键投票给已托管在ELA Bank的高收益节点，可以赢取ELA奖励啦！ELA Bank会将投票奖励自动发到您的钱包里！欢迎前往ELA Bank查看收益分配公式！",
+      "icon": "images/elabank.png",
+      "capsule": "elaphant://elabank.net/capsule/voting.capsule",
+      "labels": ["tools"]
+    },
+    {
+      "name": "Red Packet",
+      "name_en":"ELA Red Packet",
+      "name_zh_CN":"ELA红包",
+      "shortDesc":"With the ELA red packet mini program, you can send an ELA red packet to your friends.",
+      "shortDesc_en":"With the ELA red packet mini program, you can send an ELA red packet to your friends.",
+      "shortDesc_zh_CN":"使用ELA红包小程序，你可以给好友发ELA红包啦！",
+      "icon": "images/redpacket.jpg",
+      "capsule": "elaphant://redpacket.elastos.org/redpacket.capsule",
+      "labels": ["finance","tools"]
+    },
+    {
+      "name":"dposvote.h5.app",
+      "name_en":"DPoS super node",
+      "name_zh_CN":"DPoS超级节点投票",
+      "shortDesc":"In this H5 app,\n* You can vote your DPoS supernodes without sending your ELA out,\n* You can spend your ELA anytime after vote,\n* We will automatically help you keep your last votes using your balance when you spend your ELA.",
+      "shortDesc_en":"In this H5 app,\n* You can vote your DPoS supernodes without sending your ELA out,\n* You can spend your ELA anytime after vote,\n* We will automatically help you keep your last votes using your balance when you spend your ELA.",
+      "shortDesc_zh_CN":"在这个小程序里可以借助大象钱包对DPoS节点进行投票。您不必将ELA转出大象钱包即可参与DPoS选举投票，同时您还可以正常进行转账交易，不必担心之前的投票失效，因为每次转账交易都可以自动帮您投出上一次的选票。",
+      "icon": "images/icon.jpg",
+      "capsule": "elaphant://dposvote.elaphant.app/vote.capsule",
+      "labels": ["tools"]
+    },
+    {
+      "name": "elapp.org",
+      "name_en": "Community",
+      "name_zh_CN": "社区中心",
+      "shortDesc": "",
+      "shortDesc_en": "",
+      "shortDesc_zh_CN": "",
+      "icon": "images/elapp.png",
+      "capsule": "elaphant://elaphant.app/elapp.capsule",
+      "labels": ["media","news"]
+    },
+    {
+      "name": "ELA News",
+      "name_en": "ELA News",
+      "name_zh_CN": "ELA新闻",
+      "shortDesc": "ELA NEWS is the all encompassing site for all information and updates concerning Elastos. ",
+      "shortDesc_en": "ELA NEWS is the all encompassing site for all information and updates concerning Elastos. ",
+      "shortDesc_zh_CN": "ELA新闻是关于Elastos的所有信息和更新的全方位网站。",
+      "icon": "images/elanews.png",
+      "capsule": "elaphant://elanews.net/ELANews01.capsule",
+      "labels": ["news"]
+    },
+    {
+      "name": "ELAFish",
+      "name_en": "ELAFish",
+      "name_zh_CN": "ELAFish",
+      "shortDesc": "",
+      "shortDesc_en": "",
+      "shortDesc_zh_CN": "",
+      "icon": "images/elafish.png",
+      "capsule": "elaphant://play.fishchain.io/res/fishchain.capsule",
+      "labels": ["game"]
+    },
+    {
+      "name": "ELAnodes",
+      "name_en": "ELAnodes",
+      "name_zh_CN": "ELAnodes",
+      "shortDesc": "One stop shop for supernode info.",
+      "shortDesc_en": "One stop shop for supernode info.",
+      "shortDesc_zh_CN": "一站式提供超级节点信息。",
+      "icon": "images/starfish.png",
+      "capsule": "elaphant://elanodes.com/capsules/1.2.capsule",
+      "labels": ["tools"]
+    },
+    {
+      "name":"SWFT one click exchange",
+      "name_en":"SWFT one click exchange",
+      "name_zh_CN":"SWFT一键兑换",
+      "shortDesc":"\"New World, New Money.\" SWFT Blockchain is a “Next-Generation Blockchain Global Transfer Agreement.” We focus on integrating the world’s major exchanges and blockchains to effectively hedge risks and provide customers with an efficient and easy-to-use platform for cryptocurrency transfers.",
+      "shortDesc_en":"New World, New Money. SWFT Blockchain is a “Next-Generation Blockchain Global Transfer Agreement.” We focus on integrating the world’s major exchanges and blockchains to effectively hedge risks and provide customers with an efficient and easy-to-use platform for cryptocurrency transfers.",
+      "shortDesc_zh_CN":"SWFT Blockchain是“下一代区块链全球转移协议”。专注于整合全球主流交易所和区块链项目，以有效对冲风险，并为客户提供一个高效、易用的加密货币兑换平台。",
+      "icon": "images/swft.png",
+      "capsule": "elaphant://swft.elabank.net/swft.capsule",
+      "labels": ["tools","finance"]
+    },
+    {
+      "name": "Easy Transfer",
+      "name_en": "Easy Transfer",
+      "name_zh_CN":"轻松转",
+      "shortDesc":"A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
+      "shortDesc_en": "A fast cross-chain transfer service that currently supports the ELA main chain and side chain.",
+      "shortDesc_zh_CN": "支持ELA主链和侧链快速跨链转账。",
+      "icon": "images/transfer.png",
+      "capsule": "elaphant://transfer.elaphant.app/transfer.capsule",
+      "labels": ["tools"]
+    }
+  ]
+}
