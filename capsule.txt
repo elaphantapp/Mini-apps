@@ -111,5 +111,16 @@
       "capsule": "elaphant://transfer.elaphant.app/transfer.capsule",
       "labels": ["tools"]
     }
+    {
+      "name": "Easy Trade",
+      "name_en": "Easy Trade",
+      "name_zh_CN":"简单收款",
+      "shortDesc":"This is a trading tool for the seller and buyer. The seller can set one crypto token that he likes for trading, the buyer can pay another different crypto token that he had.",
+      "shortDesc_en": "This is a trading tool for the seller and buyer. The seller can set one crypto token that he likes for trading, the buyer can pay another different crypto token that he had.",
+      "shortDesc_zh_CN": "这是一个交易辅助工具，卖家可以设置他想收取的数字币，买家可以用他所持有的另一种不同的数字币支付。",
+      "icon": "images/trade.png",
+      "capsule": "elaphant://easycollect.elabank.net/EasyTrade.capsule",
+      "labels": ["tools"]
+    }
   ]
 }
