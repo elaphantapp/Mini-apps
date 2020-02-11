@@ -110,7 +110,7 @@
       "icon": "images/transfer.png",
       "capsule": "elaphant://transfer.elaphant.app/transfer.capsule",
       "labels": ["tools"]
-    }
+    },
     {
       "name": "Easy Trade",
       "name_en": "Easy Trade",
